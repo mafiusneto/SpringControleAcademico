@@ -34,17 +34,16 @@
 	<jsp:include page = "../header.jsp" />		
 	
 	<!-- ### CONTEINER ################################################################################################################### -->
-    
-    <c:url var="url" value="/turma" /> 
+    <c:url var="url" value="/aluno" /> 
 	<legend>
 		
 		<!-- define de é cadastro ou atualização -->
 		<c:choose>
-			<c:when test="${turma.id > 0}">
-			  Turma Alteração 
+			<c:when test="${aluno.id > 0}">
+			  Professor Alteração 
 			</c:when>
 			<c:otherwise>
-			  Turma Cadastro 
+			  Professor Cadastro 
 			</c:otherwise>
 		</c:choose>
 		
@@ -52,67 +51,54 @@
 	
     <span style="color: red">${erro}</span>
 	
-	<c:url var="url" value="/turma/save" />
-	
-	<!-- FORMULARIO #####################################################################  -->
-	<form class="form-horizontal" method="post" action="${url}"  modelAttribute="turma">
+	<c:url var="url" value="/aluno/save" />
+	<form class="form-horizontal" method="post" action="${url}"  modelAttribute="aluno">
 		<fieldset>
 					
-		 <input id="id" name="id" value="${turma.id}" type="hidden" >
+		 <input id="id" name="id" value="${aluno.id}" type="hidden" >
 		  
 		
 		<!-- Text input-->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="ano">Ano</label>  
+		  <label class="col-md-4 control-label" for="nome">Nome</label>  
 		  <div class="col-md-4">
-		  <input id="ano" name="ano" value="${turma.ano}" type="text" placeholder="ano" class="form-control input-md" required="">
+		  <input id="nome" name="nome" value="${aluno.nome}" type="text" placeholder="Nome" class="form-control input-md" required="">
 		  </div>
 		</div>
 		
 		<!-- Text input-->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="semestre">Semestre</label>  
+		  <label class="col-md-4 control-label" for="matricula">Mátricula</label>  
 		  <div class="col-md-4">
-		  <input id="semestre" name="semestre" value="${turma.semestre}" type="text" placeholder="descrição semestre" class="form-control input-md" required="">
+		  <input id="matricula" name="matricula" value="${aluno.matricula}" type="text" placeholder="número matricula" class="form-control input-md" required="">
 		  </div>
-		</div>
+		</div>		
 		
 		
-		<!-- PROFESSORES ########################################################################################## -->
+		
+		<!-- Text input-->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="professor">Professor</label>  
-		  <div class="col-md-4">		  	  
-			<c:forEach var="professor" items="${professores}">
-				<div class="radio">
-				  <label>
-				  	<input type="radio" id="profId" name="profId" value="${professor.id}" required="required" 
-					  <c:if test="${turma.professor.id == professor.id}">
-						  checked
-					  </c:if>
-				  >${professor.nome} - ${professor.matricula}</label>
-				</div>
-			</c:forEach>
+		  <label class="col-md-4 control-label" for="login">Login</label>  
+		  <div class="col-md-4">
+		  <input id="login" name="login" value="${aluno.login}" type="text" placeholder="login" class="form-control input-md" required="">
 		  </div>
 		</div>
 		
-		
-		<!-- DISCIPLINAS ########################################################################################## -->
+		<!-- Text input-->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="disciplina">Disciplina</label>  
-		  <div class="col-md-4">		  	  
-			<c:forEach var="disciplina" items="${disciplinas}">
-				<div class="radio">
-				  <label>
-				  	<input type="radio" id="disciplinaId" name="disciplinaId" value="${disciplina.id}" required="required" 
-					  <c:if  test="${turma.disciplina.id == disciplina.id}">
-						  checked
-					  </c:if>
-				  >${disciplina.nome} - ${disciplina.id}</label>
-				</div>
-			</c:forEach>
+		  <label class="col-md-4 control-label" for="senha">Senha</label>  
+		  <div class="col-md-4">
+		  <input id="senha" name="senha" value="${aluno.senha}" type="password" placeholder="senha" class="form-control input-md" required="">
 		  </div>
 		</div>
 		
+		<!-- Text input-->
+		<div class="form-group">
+		  <label class="col-md-4 control-label" for="matricula">Endereço</label>  
+		  <div class="col-md-4">
+		  <!-- <input id="matricula" name="matricula" value="${aluno.matricula}" type="text" placeholder="número matricula" class="form-control input-md" required=""> -->
+		  </div>
+		</div>
 		
 		
 		<!-- Button -->
@@ -122,7 +108,7 @@
 		    <button id="singlebutton" name="singlebutton" class="btn btn-primary">
 		    	<!-- define de é cadastro ou atualização -->
 				<c:choose>
-					<c:when test="${turma.id > 0}">
+					<c:when test="${aluno.id > 0}">
 					  Alterar 
 					</c:when>
 					<c:otherwise>

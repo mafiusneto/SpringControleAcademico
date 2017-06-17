@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import entities.Disciplina;
 import entities.Professor;
 import entities.Turma;
 import entities.Usuario;
+import services.DisciplinaService;
 import services.ProfessorService;
 import services.TurmaService;
 
@@ -31,6 +33,9 @@ public class TurmaController {
 	
 	@Autowired
 	private ProfessorService professorService;
+	
+	@Autowired
+	private DisciplinaService disciplinaService;
 	
 	
 	@RequestMapping(value={"","/","/listar"}, method=RequestMethod.GET)
@@ -62,6 +67,9 @@ public class TurmaController {
 		List<Professor> professores = professorService.lista();
 		map.addAttribute("professores", professores);
 		
+		List<Disciplina> disciplinas = disciplinaService.lista();
+		map.addAttribute("disciplinas", disciplinas);
+		
 		
 		return "turma/novo";
 	}
@@ -79,18 +87,32 @@ public class TurmaController {
 		List<Professor> professores = professorService.lista();
 		map.addAttribute("professores", professores);
 		
+		List<Disciplina> disciplinas = disciplinaService.lista();
+		map.addAttribute("disciplinas", disciplinas);
+		
 		return "turma/novo";
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public String salvar(@ModelAttribute("turma") @Valid Turma turma, BindingResult resultados, ModelMap map, HttpSession session, RedirectAttributes attributes){
+	public String salvar(@ModelAttribute("turma") @Valid Turma turma, String profId, String disciplinaId, BindingResult resultados, ModelMap map, HttpSession session, RedirectAttributes attributes){
 		if(resultados.hasErrors()){
 			map.addAttribute("turma",turma);
+			map.addAttribute("erro","erro no objeto!");
 			return "turma/novo";
 		}
 		
 		Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
 		map.addAttribute("usuario", usuarioLogado);
+		
+		Professor prof = professorService.buscaPorId(Long.parseLong(profId));
+		if(prof != null){
+			turma.setProfessor(prof);
+		}
+		
+		Disciplina disciplina = disciplinaService.buscaPorId(Long.parseLong(disciplinaId));
+		if(disciplina != null){
+			turma.setDisciplina(disciplina);
+		}
 		
 		if(turma.hasValidId()){
 			turmaService.atualizar(turma);

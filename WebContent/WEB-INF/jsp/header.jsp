@@ -37,6 +37,7 @@
 	
 	<nav class="navbar navbar-inverse navbar-fixed-top"  id="myNavbar">
 	  <div class="container-fluid">
+	  
 	    <div class="navbar-header">
 	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 	        <span class="icon-bar"></span>
@@ -45,13 +46,14 @@
 	      </button>
 	      <a class="navbar-brand" href="${url}home">Controle Acadêmico</a>
 	    </div>
-	    <div class="collapse navbar-collapse" id="myNavbar">
-	    	
+	    
+	    <div class="collapse navbar-collapse" id="myNavbar">	    	
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="#"><span class="glyphicon glyphicon-user"></span> ${usuario.nome}</a></li>
 		        <li><a href="${url}logout"><span class="glyphicon glyphicon-remove"></span> Logout</a></li>
 		      </ul>	
 	    </div>
+	    
 	  </div>
 	</nav>
 	<br/><br/><br/>
@@ -62,7 +64,7 @@
 	    <div class="navbar-header">
 	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 	        <span class="sr-only">Toggle navigation</span>
-	        <span class="icon-bar">aaa</span>
+	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
